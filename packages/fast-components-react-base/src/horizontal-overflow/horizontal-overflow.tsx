@@ -106,6 +106,8 @@ class HorizontalOverflow extends Foundation<
      */
     private currentScrollAnimStartTime: number;
 
+    private lastRecordedScroll: number = 0;
+
     /**
      * Constructor
      */
@@ -150,6 +152,7 @@ class HorizontalOverflow extends Foundation<
                         className={classNames(horizontalOverflow_contentRegion)}
                         style={this.getListStyle()}
                         ref={this.horizontalOverflowItemsRef}
+                        onScrollCapture={this.onScrollCapture}
                     >
                         {this.getItems()}
                     </ul>
@@ -186,6 +189,7 @@ class HorizontalOverflow extends Foundation<
 
         if (canUseDOM() && this.horizontalOverflowItemsRef.current) {
             this.updateDirection();
+            this.lastRecordedScroll = this.getScrollPosition();
             this.horizontalOverflowItemsRef.current.addEventListener(
                 "scroll",
                 this.throttledScroll
@@ -277,6 +281,10 @@ class HorizontalOverflow extends Foundation<
         );
     }
 
+    private onScrollCapture = (event: React.UIEvent): void => {
+        this.lastRecordedScroll = this.getScrollPosition();
+    };
+
     /**
      * A child item got focus make sure it is in view
      */
@@ -285,7 +293,6 @@ class HorizontalOverflow extends Foundation<
             return;
         }
 
-        const scrollPosition: number = this.getScrollPosition();
         const itemLeft: number = (event.currentTarget as HTMLElement).offsetLeft;
         const itemWidth: number = (event.currentTarget as HTMLElement).clientWidth;
         const itemRight: number = itemLeft + itemWidth;
@@ -293,9 +300,9 @@ class HorizontalOverflow extends Foundation<
         const viewportWidth: number = this.getAvailableWidth();
         const peek: number = this.getScrollPeek(itemWidth);
 
-        if (itemLeft - scrollPosition < 0) {
+        if (itemLeft - this.lastRecordedScroll < 0) {
             this.scrollContent(itemLeft - peek);
-        } else if (itemRight - scrollPosition > viewportWidth) {
+        } else if (itemRight - this.lastRecordedScroll > viewportWidth) {
             this.scrollContent(itemRight - viewportWidth + peek);
         }
     };
@@ -663,7 +670,7 @@ class HorizontalOverflow extends Foundation<
             Math.min(scrollPosition, this.getMaxScrollDistance())
         );
 
-        this.currentScrollAnimStartPosition = this.getScrollPosition();
+        this.currentScrollAnimStartPosition = this.lastRecordedScroll;
         this.currentScrollAnimEndPosition = newScrollPosition;
         this.currentScrollAnimStartTime = new Date().getTime();
         this.requestFrame();
