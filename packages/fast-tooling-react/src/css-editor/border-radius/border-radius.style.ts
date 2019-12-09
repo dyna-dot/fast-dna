@@ -12,7 +12,6 @@ export interface CSSBorderRadiusClassNameContract {
     cssBorderRadius_control?: string;
     cssBorderRadius_input?: string;
     cssBorderRadius_individualInput?: string;
-    cssBorderRadius_label?: string;
     cssBorderRadius_toggleButton?: string;
     cssBorderRadius_toggleButton__selected?: string;
     cssBorderRadius_toggleButtonGlyph?: string;
@@ -35,9 +34,6 @@ const styles: ComponentStyles<CSSBorderRadiusClassNameContract, {}> = {
         ...applyInputStyle(),
         marginRight: "4px",
         width: "inherit",
-    },
-    cssBorderRadius_label: {
-        ...applyLabelStyle(),
     },
     cssBorderRadius_toggleButton: {
         ...applyInputStyle(),

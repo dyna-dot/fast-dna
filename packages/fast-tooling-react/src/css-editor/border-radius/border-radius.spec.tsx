@@ -15,7 +15,6 @@ describe("CSSBorderRadius", () => {
         cssBorderRadius: "cssBorderRadius",
         cssBorderRadius_control: "cssBorderRadius_control",
         cssBorderRadius_input: "cssBorderRadius_input",
-        cssBorderRadius_label: "cssBorderRadius_label",
     };
 
     test("should not throw", () => {

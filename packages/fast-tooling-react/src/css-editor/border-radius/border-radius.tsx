@@ -40,11 +40,6 @@ export default class CSSBorderRadius extends Foundation<
     public render(): React.ReactNode {
         return (
             <div className={get(this.props, "managedClasses.cssBorderRadius")}>
-                <label
-                    className={get(this.props, "managedClasses.cssBorderRadius_label")}
-                >
-                    BorderRadius
-                </label>
                 <div
                     className={get(this.props, "managedClasses.cssBorderRadius_control")}
                 >
@@ -200,7 +195,7 @@ export default class CSSBorderRadius extends Foundation<
                     } ${parsedString[3]}`;
                     break;
             }
-            this.props.onChange(borderRadius);
+            this.props.onChange({ value: e.target.value || void 0 });
         };
     }
 

@@ -1,5 +1,7 @@
 import { ManagedClasses } from "@microsoft/fast-jss-manager-react";
 import { CSSBorderRadiusClassNameContract } from "./border-radius.style";
+import { ControlOnChangeConfig } from "src/form/templates";
+import { Omit } from "utility-types";
 
 export interface CSSBorderRadiusState {
     individualValues?: boolean;
@@ -20,7 +22,7 @@ export interface CSSBorderRadiusValues {
 }
 
 export interface CSSBorderRadiusUnhandledProps
-    extends React.HTMLAttributes<HTMLDivElement> {}
+    extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {}
 
 export interface CSSBorderRadiusHandledProps
     extends ManagedClasses<CSSBorderRadiusClassNameContract> {
@@ -32,7 +34,7 @@ export interface CSSBorderRadiusHandledProps
     /**
      * The onChange callback
      */
-    onChange?: (borderRadius: CSSBorderRadiusValues) => void;
+    onChange?: (config: ControlOnChangeConfig) => void;
 }
 
 export type CSSBorderRadiusProps = CSSBorderRadiusHandledProps &
