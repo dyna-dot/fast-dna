@@ -35,6 +35,8 @@ const styles: ComponentStyles<CSSBoxShadowClassNameContract, {}> = {
     },
     cssBoxShadow_colorRegion: {
         width: "37%",
+        display: "flex",
+        alignItems: "flex-end",
     },
     cssBoxShadow_control: {
         ...applyControlRegion(),

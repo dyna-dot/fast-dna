@@ -1,5 +1,7 @@
 import { ManagedClasses } from "@microsoft/fast-jss-manager-react";
 import { CSSBoxShadowClassNameContract } from "./box-shadow.style";
+import { ControlOnChangeConfig } from "src/form/templates";
+import { Omit } from "utility-types";
 
 export interface CSSBoxShadowState {
     boxShadowColor?: string;
@@ -14,7 +16,7 @@ export interface CSSBoxShadowValues {
 }
 
 export interface CSSBoxShadowUnhandledProps
-    extends React.HTMLAttributes<HTMLDivElement> {}
+    extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {}
 
 export interface CSSBoxShadowHandledProps
     extends ManagedClasses<CSSBoxShadowClassNameContract> {
@@ -26,7 +28,7 @@ export interface CSSBoxShadowHandledProps
     /**
      * The onChange callback
      */
-    onChange?: (boxShadow: CSSBoxShadowValues) => void;
+    onChange?: (config: ControlOnChangeConfig) => void;
 }
 
 export type CSSBoxShadowProps = CSSBoxShadowHandledProps & CSSBoxShadowUnhandledProps;

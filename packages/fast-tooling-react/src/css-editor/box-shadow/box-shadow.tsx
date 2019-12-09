@@ -61,7 +61,7 @@ export default class CSSBoxShadow extends Foundation<
             ];
 
             this.props.onChange({
-                boxShadow: boxShadowArray.reduce(
+                value: boxShadowArray.reduce(
                     (accum: string, current: string): string => {
                         return current.length ? accum.concat(" ", current.trim()) : accum;
                     }
@@ -76,11 +76,6 @@ export default class CSSBoxShadow extends Foundation<
                 <div
                     className={get(this.props, "managedClasses.cssBoxShadow_colorRegion")}
                 >
-                    <label
-                        className={get(this.props, "managedClasses.cssBoxShadow_label")}
-                    >
-                        Shadow
-                    </label>
                     <div
                         className={get(this.props, "managedClasses.cssBoxShadow_control")}
                     >
@@ -122,7 +117,7 @@ export default class CSSBoxShadow extends Foundation<
                     <label
                         className={get(this.props, "managedClasses.cssBoxShadow_label")}
                     >
-                        X
+                        X:
                     </label>
                     <input
                         className={get(this.props, "managedClasses.cssBoxShadow_xInput")}
@@ -141,7 +136,7 @@ export default class CSSBoxShadow extends Foundation<
                     <label
                         className={get(this.props, "managedClasses.cssBoxShadow_label")}
                     >
-                        Y
+                        Y:
                     </label>
                     <input
                         className={get(this.props, "managedClasses.cssBoxShadow_yInput")}
@@ -160,7 +155,7 @@ export default class CSSBoxShadow extends Foundation<
                     <label
                         className={get(this.props, "managedClasses.cssBoxShadow_label")}
                     >
-                        Blur
+                        Blur:
                     </label>
                     <input
                         className={get(
